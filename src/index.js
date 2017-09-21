@@ -8,6 +8,7 @@ module.exports = function zeros(expression) {
 			let sourceNumber = +arr[i].substring(0, arr[i].indexOf('!!'));
 			if (sourceNumber%2 == 0) {
 			 result = result + tens(sourceNumber)+fivesForDF(sourceNumber);
+			 tws += twoes(sourceNumber);
 			} else {
 				fvs += fivesForDF(sourceNumber);
 			}
@@ -48,7 +49,14 @@ module.exports = function zeros(expression) {
 		let count = 0;
 		if (n%2 === 0) {
 			for (let i=2; i<= n; i= i+2) {
-				if (i%50 === 0) count++;
+				let num = i;
+				while (num%10 == 0) {
+					num = num/10;
+				};
+				while(num%5 == 0 && num>1) {
+					count++;
+					num = num/5;
+				}
 			}
 		} else {
 			for (let i=1; i<= n; i= i+2) {
