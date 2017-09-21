@@ -8,9 +8,8 @@ module.exports = function zeros(expression) {
 			let sourceNumber = +arr[i].substring(0, arr[i].indexOf('!!'));
 			if (sourceNumber%2 == 0) {
 			 result = result + tens(sourceNumber)+fivesForDF(sourceNumber);
-			 tws += twoes(sourceNumber);
 			} else {
-				fvs += fives(sourceNumber);
+				fvs += fivesForDF(sourceNumber);
 			}
 		} else {
 			let sourceNumber = +arr[i].substring(0, arr[i].indexOf('!'));
@@ -19,7 +18,6 @@ module.exports = function zeros(expression) {
 		}
 	};
 	return (fvs >= tws) ? result+tws : result+fvs;
-
 };
 
 	function fives(n) {
@@ -34,11 +32,34 @@ module.exports = function zeros(expression) {
 			}
 			if (i%50 == 0 && i/10 >=5) {
 				let num = i;
+				while(num%10 == 0) {
+					num = num/10;
+				};
 				while(num%5 == 0 && num>1) {
 					count++;
-					num = num/50;
+					num = num/5;
 				}
 			}	
+		}
+		return count;
+	};
+
+	function fivesForDF(n) {
+		let count = 0;
+		if (n%2 === 0) {
+			for (let i=2; i<= n; i= i+2) {
+				if (i%50 === 0) count++;
+			}
+		} else {
+			for (let i=1; i<= n; i= i+2) {
+				if (i%5 === 0) {
+					let num = i;
+					while(num%5 == 0 && num>1) {
+						count++;
+						num = num/5;
+					}
+				}
+			}
 		}
 		return count;
 	};
@@ -62,27 +83,6 @@ module.exports = function zeros(expression) {
 					num = num/10;
 				}
 			}
-		}
-		return count;
-	};
-
-	function fivesForDF(n) {
-		let count = 0;
-		for (let i=2; i<= n; i=i+2) {
-			if (i%5 == 0 && i%2 !== 0)  {
-				let num = i;
-				while(num%5 == 0 && num>1) {
-					count++;
-					num = num/5;
-				}
-			}
-			if (i%50 == 0 && i/10 >=5) {
-				let num = i;
-				while(num%5 == 0 && num>1) {
-					count++;
-					num = num/50;
-				}
-			}	
 		}
 		return count;
 	};
